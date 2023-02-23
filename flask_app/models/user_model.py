@@ -71,7 +71,6 @@ class User:
             #     break
             data = {
                     "id":row["vehicles.id"],
-                    "admin_id":row["admin_id"],
                     "product_type":row["product_type"],
                     "mileage":row["mileage"],
                     "age":row["age"],

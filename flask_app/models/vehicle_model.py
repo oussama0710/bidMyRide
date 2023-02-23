@@ -5,7 +5,6 @@ from flask_app import DB
 class Vehicle:
     def __init__(self,data):
         self.id=data["id"]
-        self.admin_id=data["admin_id"]
         self.product_type=data["product_type"]
         self.mileage=data["mileage"]
         self.age=data["age"]
@@ -20,7 +19,7 @@ class Vehicle:
         self.auction_start_date=data["auction_start_date"]
         self.auction_last_date=data["auction_last_date"]
         self.created_at=data["created_at"]
-        self.uptated_at=data["uptated_at"]
+        self.updated_at=data["updated_at"]
         self.users_who_favorited=[]
     @classmethod
     def save_vehicle(cls,data):
@@ -35,6 +34,11 @@ class Vehicle:
     def get_all(cls):
         query = """SELECT * FROM vehicles;"""
         return connectToMySQL(DB).query_db(query)
+    @classmethod
+    def get_one_by_id(cls,data):
+        query = "SELECT * FROM vehicles WHERE id=%(id)s;"
+        result= connectToMySQL(DB).query_db(query,data)
+        return cls(result[0])
     @classmethod
     def get_result(cls):
         query = """SELECT * FROM vehicles 
