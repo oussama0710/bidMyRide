@@ -1,0 +1,1 @@
+SELECT * FROM bid_my_ride_schema.users;
