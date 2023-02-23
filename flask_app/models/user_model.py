@@ -67,8 +67,8 @@ class User:
         user = cls(results[0])
         print("**************",results,"********************")
         for row in results:
-            if row['authors.id'] == None:
-                break
+            # if row['authors.id'] == None:
+            #     break
             data = {
                     "id":row["vehicles.id"],
                     "admin_id":row["admin_id"],
