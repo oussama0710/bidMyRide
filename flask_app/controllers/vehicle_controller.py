@@ -25,7 +25,8 @@ def show_vehicle(id):
         'id':id
     }
     vehicle=Vehicle.get_one_by_id(data)
-    return render_template('vehicle.html',vehicle=vehicle)
+    return render_template('vehicle.html',vehicle=vehicle,unfavorited_users=User.unfavorited_authors(data))
+
 @app.route('/show/result')
 def show_result():
     all_vehicles = Vehicle.get_result()

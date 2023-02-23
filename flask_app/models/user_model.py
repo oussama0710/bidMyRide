@@ -53,7 +53,11 @@ class User:
     
     @classmethod
     def add_favorite(cls,data):
-        query = "INSERT INTO favourites (user_id,vehicle_id) VALUES (%(user_id)s,%(vehicle_id)s);"
+        query = "INSERT INTO favourites (user_id,vehicle_id,favorized) VALUES (%(user_id)s,%(vehicle_id)s,1);"
+        return connectToMySQL(DB).query_db(query,data)
+    @classmethod
+    def remove_favorite(cls,data):
+        query = "DELETE FROM favourites WHERE (user_id=%(user_id)s) AND (vehicle_id=%(vehicle_id)s);"
         return connectToMySQL(DB).query_db(query,data)
     @classmethod
     def get_one_by_id(cls,data):

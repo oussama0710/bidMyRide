@@ -48,3 +48,13 @@ def login():
 def logout():
     session.clear()
     return redirect('/')
+    # ============= action route =============
+@app.route('/favorize/vehicle',methods=['POST'])
+def favourite_vehicle():
+    data = {
+        'user_id': request.form['user_id'],
+        'vehicle_id': request.form['vehicle_id']
+    }
+    User.add_favorite(data)
+    
+    return redirect(f"/show/vehicle/{request.form['user_id']}")
