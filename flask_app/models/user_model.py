@@ -95,17 +95,6 @@ class User:
             print("************111**",user,"********************")
         return user
 
-
-    @classmethod
-    def unfavorited_users(cls,data):
-        query = "SELECT * FROM users WHERE users.id NOT IN ( SELECT user_id FROM favourites WHERE vehicle_id = %(id)s );"
-        users = []
-        results = connectToMySQL(DB).query_db(query,data)
-        for row in results:
-            users.append(cls(row))
-        return users
-
-
     @staticmethod
     def validate_user(data):
         is_valid = True

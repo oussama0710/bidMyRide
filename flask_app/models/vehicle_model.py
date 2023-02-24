@@ -53,16 +53,6 @@ class Vehicle:
         return connectToMySQL(DB).query_db(query,data)
     
     @classmethod
-    def unfavorited_vehicles(cls,data):
-        query = "SELECT * FROM vehicles WHERE vehicles.id NOT IN ( SELECT vehicle_id FROM favourites WHERE user_id = %(id)s );"
-        results = connectToMySQL(DB).query_db(query,data)
-        vehicles = []
-        for row in results:
-            vehicles.append(cls(row))
-        print(vehicles)
-        return vehicles
-    
-    @classmethod
     def get_by_id(cls,data):
         query = """SELECT * FROM vehicles 
         LEFT JOIN favourites ON vehicles.id = favourites.vehicle_id 
