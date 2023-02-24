@@ -2,6 +2,7 @@ from flask_app import app
 from flask import render_template, request, redirect, session, flash
 from flask_app.models.user_model import User
 from flask_app.models.vehicle_model import Vehicle
+from flask_app.models.favourite_model import Favourite
 #=============DISPLAY ROUTE==============================
 @app.route('/vehicle/new')
 def new_vehicle():
@@ -25,7 +26,8 @@ def show_vehicle(id):
         'id':id
     }
     vehicle=Vehicle.get_one_by_id(data)
-    return render_template('vehicle.html',vehicle=vehicle,unfavorited_users=User.unfavorited_authors(data))
+    favourite=Favourite.get_one_by_id({'vehicle_id':id,'user_id': session['user_id'] })
+    return render_template('vehicle.html',vehicle=vehicle,favourite=favourite)
 
 @app.route('/show/result')
 def show_result():

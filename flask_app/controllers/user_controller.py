@@ -57,4 +57,4 @@ def favourite_vehicle():
     }
     User.add_favorite(data)
     
-    return redirect(f"/show/vehicle/{request.form['user_id']}")
+    return redirect(f"/show/vehicle/{request.form['vehicle_id']}")

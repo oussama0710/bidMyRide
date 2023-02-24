@@ -97,7 +97,7 @@ class User:
 
 
     @classmethod
-    def unfavorited_authors(cls,data):
+    def unfavorited_users(cls,data):
         query = "SELECT * FROM users WHERE users.id NOT IN ( SELECT user_id FROM favourites WHERE vehicle_id = %(id)s );"
         users = []
         results = connectToMySQL(DB).query_db(query,data)
