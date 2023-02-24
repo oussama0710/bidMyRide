@@ -24,10 +24,7 @@ def register():
 # ============= display route =============
 @app.route('/home')
 def home():
-    if 'user_id' not in session:
-        return redirect('/')
-    user= User.get_by_id({'id': session['user_id']})
-    return render_template("home.html",user=user)
+    return render_template("home.html")
     
 # ============= action route =============
 @app.route('/login', methods=['POST'])
