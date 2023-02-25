@@ -55,17 +55,41 @@
             </ul>
             <h1>{{vehicle.vehicle_name}}</h1>
             <h2>{{vehicle.description}}</h2>
+            <div style="display: flex;">
+                <p>auction start date: </p>
+                <p> {{vehicle.auction_start_date}}</p>
+            </div>  
+            <div style="display: flex;">
+                <p>auction last date: </p>
+                <p> {{vehicle.auction_last_date}} 23:59 PM</p>
+            </div>  
             <p>Lowest Price:</p>
             <p>{{vehicle.start_price}}</p>
-            <div class="d-flex">
-                <p>Last Bid</p>
-                <p>## TO DO ##</p>
-                <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
-                    <span class="input-group-text">TND</span>
+            {% if last_bid.user_id == session['user_id'] %}
+                <p> You Are The Last Bidder </p>
+                <p>Your Bid: {{last_bid.bid_price}} TND</p>
+            {% else %}
+                <div class="d-flex">
+                    {% if last_bid.bid_price is defined %}
+                        <p>Last Bid:  {{last_bid.bid_price}} TND</p>
+                    {% else %}
+                        <p>There is no previous bid</p>
+                    {% endif %}
                 </div>
-                <button type="submit" class="btn btn-success"> Place Your Bid</button>
-            </div>
+                    
+                <form action="/place/bid" method="post">
+                    <input type="hidden" name="vehicle_id" value="{{vehicle.id}}">
+                    <div class="input-group">
+                        <label for="bid_price">Increment Bid By:</label>
+                        <input type="text" name="bid_price" class="form-control" aria-label="Dinar amount (with dot and two decimal places)">
+                        <span class="input-group-text">TND</span>
+                        <button type="submit" value=500 name="bid_price">500 Dinar</button>
+                        <button type="submit" value=1000 name="bid_price">1000 Dinar</button>
+                        <button type="submit" value=5000 name="bid_price">5000 Dinar</button>
+                    </div>
+                    <button type="submit" class="btn btn-success"> Place Your Bid</button>
+                </form>
+            {% endif %}
         </div>
     </div>
 </body>

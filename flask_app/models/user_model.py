@@ -13,6 +13,7 @@ class User:
         self.email = data['email']
         self.cin = data['cin']
         self.password = data['password']
+        self.role = data['role']
         self.created_at=data['created_at']
         self.updated_at=data['updated_at']
         self.favourite_vehicles=[]
@@ -53,7 +54,7 @@ class User:
     
     @classmethod
     def add_favorite(cls,data):
-        query = "INSERT INTO favourites (user_id,vehicle_id,favorized) VALUES (%(user_id)s,%(vehicle_id)s,1);"
+        query = "INSERT INTO favourites (user_id,vehicle_id) VALUES (%(user_id)s,%(vehicle_id)s);"
         return connectToMySQL(DB).query_db(query,data)
     @classmethod
     def remove_favorite(cls,data):

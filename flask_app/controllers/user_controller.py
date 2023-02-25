@@ -4,6 +4,7 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask_app.models.user_model import User
 from flask_app.models.vehicle_model import Vehicle
+from flask_app.models.bid_model import Bid
 
 # ============= display route =============
 @app.route('/registration')
@@ -58,6 +59,7 @@ def favourite_vehicle():
     User.add_favorite(data)
     
     return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
+    # ============= action route =============
 @app.route('/unfavorize/vehicle',methods=['POST'])
 def unfavorize_vehicle():
     data = {
@@ -67,3 +69,22 @@ def unfavorize_vehicle():
     User.remove_favorite(data)
     
     return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
+    # ============= action route =============
+@app.route('/place/bid',methods=['POST'])
+def place_bid():
+    data = {
+        'user_id': session['user_id'],
+        'vehicle_id': request.form['vehicle_id'],
+        'bid_price':request.form['bid_price']
+    }
+    Bid.add_bidding(data)
+    
+    return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
+# ============= display route =============
+@app.route('/add/product')
+def add_product():
+    user=User.get_by_id({'id':session['user_id']})
+    if (user.role== True):
+        return render_template('add_product.html')
+    return redirect('/')
+    
