@@ -26,8 +26,8 @@ def show_vehicle(id):
         'id':id
     }
     vehicle=Vehicle.get_one_by_id(data)
-    favourite=Favourite.get_one_by_id({'vehicle_id':id,'user_id': session['user_id'] })
-    return render_template('vehicle.html',vehicle=vehicle,favourite=favourite)
+    favourites=Favourite.get_one_by_id({'vehicle_id':id,'user_id': session['user_id'] })
+    return render_template('vehicle.html',vehicle=vehicle,favourites=favourites)
 
 @app.route('/show/result')
 def show_result():

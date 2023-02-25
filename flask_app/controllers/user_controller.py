@@ -4,9 +4,12 @@ from flask_bcrypt import Bcrypt
 bcrypt = Bcrypt(app)
 from flask_app.models.user_model import User
 from flask_app.models.vehicle_model import Vehicle
+
 # ============= display route =============
-@app.route('/')
+@app.route('/registration')
 def user():
+    if 'user_id' in session:
+        return redirect('/')
     return render_template('registration.html')
 # ============= action route =============
 @app.route('/register', methods=['post'])
@@ -22,7 +25,7 @@ def register():
 
     return redirect('/')
 # ============= display route =============
-@app.route('/home')
+@app.route('/')
 def home():
     return render_template("home.html")
     
@@ -38,7 +41,7 @@ def login():
         flash("Invalid Email/Password", "password")
         return redirect('/')
     session['user_id'] = user_in_db.id
-    return redirect('/home')
+    return redirect('/')
 
     # ============= action route =============
 @app.route('/user/logout')
@@ -53,5 +56,14 @@ def favourite_vehicle():
         'vehicle_id': request.form['vehicle_id']
     }
     User.add_favorite(data)
+    
+    return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
+@app.route('/unfavorize/vehicle',methods=['POST'])
+def unfavorize_vehicle():
+    data = {
+        'user_id': session['user_id'],
+        'vehicle_id': request.form['vehicle_id']
+    }
+    User.remove_favorite(data)
     
     return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
