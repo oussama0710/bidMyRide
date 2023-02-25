@@ -6,7 +6,6 @@ class Favourite:
     def __init__(self,data):
         self.vehicle_id=data["vehicle_id"]
         self.user_id=data["user_id"]
-        self.favorized=data["favorized"]
         self.created_at=data["created_at"]
         self.updated_at=data["updated_at"]
     @classmethod
