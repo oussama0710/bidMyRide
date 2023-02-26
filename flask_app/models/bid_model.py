@@ -14,7 +14,7 @@ class Bid:
     def add_bidding(cls,data):
         query = """
                 INSERT INTO bidding (vehicle_id, user_id, bid_price) 
-                VALUES (%(vehicle_id)s, %(user_id)s, %(bid_price)s)
+                VALUES (%(vehicle_id)s, %(user_id)s, %(last_bid_amount)s + %(bid_price)s)
                 """
         return connectToMySQL(DB).query_db(query, data)
     @classmethod
@@ -49,3 +49,14 @@ class Bid:
                     "age":row["age"],
                     "transmission":row["transmission"],
             }
+
+    @staticmethod
+    def validate_bid(data):
+        is_valid = True
+        if int(data['bid_price'])<500 :
+            is_valid = False
+            flash("bid increment must be greater than 500 TND  ", "bid_price")
+        if int(data['bid_price']) % 100 :
+            is_valid = False
+            flash("bid must not have ones and tens   ", "bid_price")
+        return is_valid

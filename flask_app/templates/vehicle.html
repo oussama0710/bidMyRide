@@ -6,6 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Product</title>
+    <style>
+        /* Remove circle indicator from radio buttons */
+        input[type="radio"].btn-check + .btn-secondary:before {
+          content: "";
+          background-color: transparent;
+          border-color: inherit;
+        }
+        input[type="radio"].btn-check:checked + .btn-secondary:before {
+          content: "";
+          background-color: inherit;
+          border-color: inherit;
+        }
+      </style>
 </head>
 <body>
     
@@ -63,7 +76,7 @@
                 <p>auction last date: </p>
                 <p> {{vehicle.auction_last_date}} 23:59 PM</p>
             </div>  
-            <p>Lowest Price:</p>
+            <p>Start Price:</p>
             <p>{{vehicle.start_price}}</p>
             {% if last_bid.user_id == session['user_id'] %}
                 <p> You Are The Last Bidder </p>
@@ -76,18 +89,55 @@
                         <p>There is no previous bid</p>
                     {% endif %}
                 </div>
+                
                     
                 <form action="/place/bid" method="post">
+                    {% if last_bid.bid_price is defined %}
+                    <input type="hidden" name="last_bid_amount" value="{{last_bid.bid_price}}">
+                    {% else %}
+                    <input type="hidden" name="last_bid_amount" value="{{vehicle.start_price}}">
+                    {% endif %}
                     <input type="hidden" name="vehicle_id" value="{{vehicle.id}}">
+                    <label for="bid_price">Increment Bid By:</label>
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="option" value=500 id="radio1" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="radio1">500 TND</label>
+                    
+                        <input type="radio" class="btn-check" name="option" value=1000 id="radio2" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="radio2">1000 TND</label>
+                    
+                        <input type="radio" class="btn-check" name="option" value=5000 id="radio3" autocomplete="off">
+                        <label class="btn btn-outline-secondary" for="radio3">5000 TND</label>
+                    </div>
                     <div class="input-group">
-                        <label for="bid_price">Increment Bid By:</label>
-                        <input type="text" name="bid_price" class="form-control" aria-label="Dinar amount (with dot and two decimal places)">
+                        
+                        <input type="text" id="bid_price" name="bid_price" class="form-control" aria-label="Dinar amount (with dot and two decimal places)">
                         <span class="input-group-text">TND</span>
+                        {% for message in get_flashed_messages(category_filter=["bid_price"]) %} 
+                        <p class="text-danger">{{message}}  </p>
+                        <br><br>                   
+                        {% endfor %}
                     </div>
                     <button type="submit" class="btn btn-success"> Place Your Bid</button>
                 </form>
             {% endif %}
         </div>
     </div>
+
+    <script>
+        // Get the radio buttons
+        var radioButtons = document.getElementsByName('option');
+      
+        // Get the input field
+        var inputField = document.getElementById('bid_price');
+      
+        // Add a change event listener to the radio buttons
+        radioButtons.forEach(function(radio) {
+          radio.addEventListener('change',function() {
+            // Update the input field value with the selected radio button value
+            inputField.value = this.value;
+          });
+        });
+      </script>
 </body>
 </html>

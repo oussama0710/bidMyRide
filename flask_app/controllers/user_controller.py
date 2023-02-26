@@ -72,13 +72,18 @@ def unfavorize_vehicle():
     # ============= action route =============
 @app.route('/place/bid',methods=['POST'])
 def place_bid():
+    if not Bid.validate_bid(request.form):
+        return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
     data = {
         'user_id': session['user_id'],
         'vehicle_id': request.form['vehicle_id'],
+        'last_bid_amount': request.form['last_bid_amount'],
         'bid_price':request.form['bid_price']
+
     }
     Bid.add_bidding(data)
-    
+    if not Bid.validate_bid(request.form):
+        return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
     return redirect(f"/show/vehicle/{request.form['vehicle_id']}")
 # ============= display route =============
 @app.route('/add/product')
