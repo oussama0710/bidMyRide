@@ -34,6 +34,21 @@ h5,
 h6 {
   font-family: "Dosis", sans-serif;
 }
+.list1{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.list2{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+.list3{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
 
 /*--------------------------------------------------------------
 # Back to top button
