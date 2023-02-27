@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="../static/css/style.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Favicons -->
   <link href="../static/img/favicon.png" rel="icon">
   <link href="../static/img/apple-touch-icon.png" rel="apple-touch-icon">
@@ -21,10 +23,49 @@
   <link href="../static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="../static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
     <title>Document</title>
+    <style>/* Style the tab */
+      .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #f1f1f1;
+        width: 188px;
+      }
+      
+      /* Style the buttons inside the tab */
+      .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 30px;
+      }
+      
+      /* Change background color of buttons on hover */
+      .tab button:hover {
+        background-color: #ddd;
+      }
+      
+      /* Create an active/current tablink class */
+      .tab button.active {
+        background-color: #ccc;
+      }
+      
+      /* Style the tab content */
+      .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+      }
+      </style>
 </head>
-<body>
+
+<body style="padding: 0 10%;">
 <!-- ######################### Nav Bar ######################### -->
-<header id="header" class="fixed-top ">
+<header id="header" class="fixed-top " style="padding: 0px 0;" >
   <div class="container d-flex align-items-center justify-content-between">
 
     <a href="index.html" class="logo"><img src="../static/img/logo1.png" alt="" class="img-fluid"></a>
@@ -61,54 +102,109 @@
   </div>
 </header><!-- End Header -->
 <br><br><br><br><br>
-<!-- ##################### filter for search ######################### -->   
-<form action="" method="post">
-        <div class="btn-group me-2" role="tablist" aria-label="Large button group">
-          <button type="button" class="btn btn-outline-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-car-front" viewBox="0 0 16 16">
-              <path d="M4 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0Zm10 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0ZM6 8a1 1 0 0 0 0 2h4a1 1 0 1 0 0-2H6ZM4.862 4.276 3.906 6.19a.51.51 0 0 0 .497.731c.91-.073 2.35-.17 3.597-.17 1.247 0 2.688.097 3.597.17a.51.51 0 0 0 .497-.731l-.956-1.913A.5.5 0 0 0 10.691 4H5.309a.5.5 0 0 0-.447.276Z"></path>
-              <path d="M2.52 3.515A2.5 2.5 0 0 1 4.82 2h6.362c1 0 1.904.596 2.298 1.515l.792 1.848c.075.175.21.319.38.404.5.25.855.715.965 1.262l.335 1.679c.033.161.049.325.049.49v.413c0 .814-.39 1.543-1 1.997V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.338c-1.292.048-2.745.088-4 .088s-2.708-.04-4-.088V13.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-1.892c-.61-.454-1-1.183-1-1.997v-.413a2.5 2.5 0 0 1 .049-.49l.335-1.68c.11-.546.465-1.012.964-1.261a.807.807 0 0 0 .381-.404l.792-1.848ZM4.82 3a1.5 1.5 0 0 0-1.379.91l-.792 1.847a1.8 1.8 0 0 1-.853.904.807.807 0 0 0-.43.564L1.03 8.904a1.5 1.5 0 0 0-.03.294v.413c0 .796.62 1.448 1.408 1.484 1.555.07 3.786.155 5.592.155 1.806 0 4.037-.084 5.592-.155A1.479 1.479 0 0 0 15 9.611v-.413c0-.099-.01-.197-.03-.294l-.335-1.68a.807.807 0 0 0-.43-.563 1.807 1.807 0 0 1-.853-.904l-.792-1.848A1.5 1.5 0 0 0 11.18 3H4.82Z"></path>
-            </svg>
-          </button>
-          <button type="button" class="btn btn-outline-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-bicycle" viewBox="0 0 16 16">
-              <path d="M4 4.5a.5.5 0 0 1 .5-.5H6a.5.5 0 0 1 0 1v.5h4.14l.386-1.158A.5.5 0 0 1 11 4h1a.5.5 0 0 1 0 1h-.64l-.311.935.807 1.29a3 3 0 1 1-.848.53l-.508-.812-2.076 3.322A.5.5 0 0 1 8 10.5H5.959a3 3 0 1 1-1.815-3.274L5 5.856V5h-.5a.5.5 0 0 1-.5-.5zm1.5 2.443-.508.814c.5.444.85 1.054.967 1.743h1.139L5.5 6.943zM8 9.057 9.598 6.5H6.402L8 9.057zM4.937 9.5a1.997 1.997 0 0 0-.487-.877l-.548.877h1.035zM3.603 8.092A2 2 0 1 0 4.937 10.5H3a.5.5 0 0 1-.424-.765l1.027-1.643zm7.947.53a2 2 0 1 0 .848-.53l1.026 1.643a.5.5 0 1 1-.848.53L11.55 8.623z"></path>
-            </svg>
-          </button>
-          <button type="button" class="btn btn-outline-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-              <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path>
-            </svg>
-          </button>
-          <button type="button" class="btn btn-outline-dark">
-            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
-              <path d="M192 32c0-17.7 14.3-32 32-32H352c17.7 0 32 14.3 32 32V64h48c26.5 0 48 21.5 48 48V240l44.4 14.8c23.1 7.7 29.5 37.5 11.5 53.9l-101 92.6c-16.2 9.4-34.7 15.1-50.9 15.1c-19.6 0-40.8-7.7-59.2-20.3c-22.1-15.5-51.6-15.5-73.7 0c-17.1 11.8-38 20.3-59.2 20.3c-16.2 0-34.7-5.7-50.9-15.1l-101-92.6c-18-16.5-11.6-46.2 11.5-53.9L96 240V112c0-26.5 21.5-48 48-48h48V32zM160 218.7l107.8-35.9c13.1-4.4 27.3-4.4 40.5 0L416 218.7V128H160v90.7zM306.5 421.9C329 437.4 356.5 448 384 448c26.9 0 55.4-10.8 77.4-26.1l0 0c11.9-8.5 28.1-7.8 39.2 1.7c14.4 11.9 32.5 21 50.6 25.2c17.2 4 27.9 21.2 23.9 38.4s-21.2 27.9-38.4 23.9c-24.5-5.7-44.9-16.5-58.2-25C449.5 501.7 417 512 384 512c-31.9 0-60.6-9.9-80.4-18.9c-5.8-2.7-11.1-5.3-15.6-7.7c-4.5 2.4-9.7 5.1-15.6 7.7c-19.8 9-48.5 18.9-80.4 18.9c-33 0-65.5-10.3-94.5-25.8c-13.4 8.4-33.7 19.3-58.2 25c-17.2 4-34.4-6.7-38.4-23.9s6.7-34.4 23.9-38.4c18.1-4.2 36.2-13.3 50.6-25.2c11.1-9.4 27.3-10.1 39.2-1.7l0 0C136.7 437.2 165.1 448 192 448c27.5 0 55-10.6 77.5-26.1c11.1-7.9 25.9-7.9 37 0z"></path>
-            </svg>
-          </button>
-        </div>
-        <div class="card">
-            <select name="make"  class="form-select" aria-label="Default select example">
-                <option selected>Make</option>
-                {%for vehicle in vehicles %}
-                <option value={{vehicle.make}}>{{vehicle.make}}</option>
-                {% endfor %}
-            </select>
-            <select name="start_price" class="form-select" aria-label="Default select example">
-                <option  selected>Price Up To (TND)</option>
-                <option value="3000">3000 TND</option>
-                {% for i in range(5000,90000,5000) %}
-                <option value={{i}}>{{i}} TND</option>
-                {% endfor %}
-            </select>
-            <select name="order" class="form-select" aria-label="Default select example">
-                <option selected>ORDER BY</option>
-                <option value="DESC">Highest price</option>
-                <option value="ASC">Lowest price</option>
-            </select>
-            <button type="submit"> Show Results </button>
-        </div>
-    </form>
+<!-- ##################### filter for search ######################### -->    
+
+
+<div class="tab" style="margin-top: 30px;">
+  <button class="tablinks" onclick="openCity(event, 'London')"><i class="bi bi-car-front"></i></button>
+  <button class="tablinks" onclick="openCity(event, 'Paris')"><i class="bi bi-bicycle"></i></button>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')"><i class="bi bi-truck"></i></button>
+</div>
+
+<div id="London" class="tabcontent">
+  <form action="" method="post">
+    <div class="card" style="width: 100%; height: 130px;">
+      <div class="form_select">
+        <select name="make"  class="form-select" aria-label="Default select example">
+            <option selected>Make</option>
+            {%for vehicle in vehicles %}
+            <option value={{vehicle.make}}>{{vehicle.make}}</option>
+            {% endfor %}
+        </select>
+        <select name="start_price" class="form-select" aria-label="Default select example">
+            <option  selected>Price Up To (TND)</option>
+            <option value="3000">3000 TND</option>
+            {% for i in range(5000,90000,5000) %}
+            <option value={{i}}>{{i}} TND</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form_select1">
+        <select name="order" class="form-select" aria-label="Default select example">
+            <option selected>ORDER BY</option>
+            <option value="DESC">Highest price</option>
+            <option value="ASC">Lowest price</option>
+        </select>
+        <button type="submit" class="btn btn-primary"> Show Results </button>
+    </div>
+  </div>
+  </form>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <form action="" method="post">
+    <div class="card" style="width: 100%; height: 130px;">
+      <div class="form_select">
+        <select name="make"  class="form-select" aria-label="Default select example">
+            <option selected>Make</option>
+            {%for vehicle in vehicles %}
+            <option value={{vehicle.make}}>{{vehicle.make}}</option>
+            {% endfor %}
+        </select>
+        <select name="start_price" class="form-select" aria-label="Default select example">
+            <option  selected>Price Up To (TND)</option>
+            <option value="3000">3000 TND</option>
+            {% for i in range(5000,90000,5000) %}
+            <option value={{i}}>{{i}} TND</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form_select1">
+        <select name="order" class="form-select" aria-label="Default select example">
+            <option selected>ORDER BY</option>
+            <option value="DESC">Highest price</option>
+            <option value="ASC">Lowest price</option>
+        </select>
+        <button type="submit" class="btn btn-primary"> Show Results </button>
+    </div>
+  </div>
+  </form>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <form action="" method="post">
+    <div class="card" style="width: 100%; height: 130px;">
+      <div class="form_select">
+        <select name="make"  class="form-select" aria-label="Default select example">
+            <option selected>Make</option>
+            {%for vehicle in vehicles %}
+            <option value={{vehicle.make}}>{{vehicle.make}}</option>
+            {% endfor %}
+        </select>
+        <select name="start_price" class="form-select" aria-label="Default select example">
+            <option  selected>Price Up To (TND)</option>
+            <option value="3000">3000 TND</option>
+            {% for i in range(5000,90000,5000) %}
+            <option value={{i}}>{{i}} TND</option>
+            {% endfor %}
+        </select>
+      </div>
+      <div class="form_select1">
+        <select name="order" class="form-select" aria-label="Default select example">
+            <option selected>ORDER BY</option>
+            <option value="DESC">Highest price</option>
+            <option value="ASC">Lowest price</option>
+        </select>
+        <button type="submit" class="btn btn-primary"> Show Results </button>
+    </div>
+  </div>
+  </form>
+</div>
+
+
+
 <!-- ##################### search result ######################### -->
+
 
 <!-- Vendor JS Files -->
 <script src="../static/vendor/purecounter/purecounter_vanilla.js"></script>
@@ -120,6 +216,23 @@
 
 <!-- Template Main JS File -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<script>
+  function openCity(evt, cityName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+      tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(cityName).style.display = "block";
+    evt.currentTarget.className += " active";
+  }
+  </script>
 </body>
 </html>

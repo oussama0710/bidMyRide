@@ -8,7 +8,6 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
-
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;}
@@ -702,4 +701,12 @@ section {
   margin-bottom: 0;
 }
 
+.form_select{
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.form_select1{
+  display: flex;
+}
 /*--------------------------------------------------------------
