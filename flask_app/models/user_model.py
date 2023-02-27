@@ -13,6 +13,7 @@ class User:
         self.email = data['email']
         self.cin = data['cin']
         self.password = data['password']
+        self.role = data['role']
         self.created_at=data['created_at']
         self.updated_at=data['updated_at']
         self.favourite_vehicles=[]
@@ -56,6 +57,10 @@ class User:
         query = "INSERT INTO favourites (user_id,vehicle_id) VALUES (%(user_id)s,%(vehicle_id)s);"
         return connectToMySQL(DB).query_db(query,data)
     @classmethod
+    def remove_favorite(cls,data):
+        query = "DELETE FROM favourites WHERE (user_id=%(user_id)s) AND (vehicle_id=%(vehicle_id)s);"
+        return connectToMySQL(DB).query_db(query,data)
+    @classmethod
     def get_one_by_id(cls,data):
         query = """SELECT * FROM users 
         LEFT JOIN favourites ON users.id = favourites.user_id 
@@ -67,11 +72,10 @@ class User:
         user = cls(results[0])
         print("**************",results,"********************")
         for row in results:
-            if row['authors.id'] == None:
-                break
+            # if row['authors.id'] == None:
+            #     break
             data = {
                     "id":row["vehicles.id"],
-                    "admin_id":row["admin_id"],
                     "product_type":row["product_type"],
                     "mileage":row["mileage"],
                     "age":row["age"],
@@ -91,17 +95,6 @@ class User:
             user.favourite_vehicles.append(vehicle_model.Vehicle(data))
             print("************111**",user,"********************")
         return user
-
-
-    @classmethod
-    def unfavorited_authors(cls,data):
-        query = "SELECT * FROM users WHERE users.id NOT IN ( SELECT user_id FROM favourites WHERE vehicle_id = %(id)s );"
-        users = []
-        results = connectToMySQL(DB).query_db(query,data)
-        for row in results:
-            users.append(cls(row))
-        return users
-
 
     @staticmethod
     def validate_user(data):

@@ -5,7 +5,6 @@ from flask_app import DB
 class Vehicle:
     def __init__(self,data):
         self.id=data["id"]
-        self.admin_id=data["admin_id"]
         self.product_type=data["product_type"]
         self.mileage=data["mileage"]
         self.age=data["age"]
@@ -20,7 +19,7 @@ class Vehicle:
         self.auction_start_date=data["auction_start_date"]
         self.auction_last_date=data["auction_last_date"]
         self.created_at=data["created_at"]
-        self.uptated_at=data["uptated_at"]
+        self.updated_at=data["updated_at"]
         self.users_who_favorited=[]
     @classmethod
     def save_vehicle(cls,data):
@@ -36,6 +35,11 @@ class Vehicle:
         query = """SELECT * FROM vehicles;"""
         return connectToMySQL(DB).query_db(query)
     @classmethod
+    def get_one_by_id(cls,data):
+        query = "SELECT * FROM vehicles WHERE id=%(id)s;"
+        result= connectToMySQL(DB).query_db(query,data)
+        return cls(result[0])
+    @classmethod
     def get_result(cls):
         query = """SELECT * FROM vehicles 
         WHERE product_type=%(vehicle_type)s 
@@ -47,16 +51,6 @@ class Vehicle:
     def delete(cls, data):
         query = """DELETE FROM vehicles WHERE id = %(id)s;"""
         return connectToMySQL(DB).query_db(query,data)
-    
-    @classmethod
-    def unfavorited_vehicles(cls,data):
-        query = "SELECT * FROM vehicles WHERE vehicles.id NOT IN ( SELECT vehicle_id FROM favourites WHERE user_id = %(id)s );"
-        results = connectToMySQL(DB).query_db(query,data)
-        vehicles = []
-        for row in results:
-            vehicles.append(cls(row))
-        print(vehicles)
-        return vehicles
     
     @classmethod
     def get_by_id(cls,data):
